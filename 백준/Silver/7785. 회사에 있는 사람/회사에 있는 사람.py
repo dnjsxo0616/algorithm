@@ -1,14 +1,13 @@
+lis ={}
 n = int(input())
 
-ans = {}
-
-for i in range(n):
+for _ in range(n):
     a, b = input().split()
-    if b == "enter" :
-        ans[a] = b
+    if b == 'enter':
+        lis[a] = b
     else:
-        del ans[a]
-        
-ans = sorted(ans.keys(), reverse = True)
+        del lis[a]
+
+ans = sorted(lis, reverse=True)
 for i in ans:
     print(i)
