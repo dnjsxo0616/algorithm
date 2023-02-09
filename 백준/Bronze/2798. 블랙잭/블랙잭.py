@@ -1,13 +1,11 @@
-n, m = list(map(int, input().split()))
-num = list(map(int, input().split()))
+n, m = map(int, input().split())
 
-#3장씩 m이 넘지않는 최대수
+numbers = list(map(int, input().split()))
 ans = []
-
 for i in range(n-2):
-    for j in range(i+1, n-1):
+    for j in range(i+1,n-1):
         for k in range(j+1, n):
-            total = num[i] + num[j] + num[k]
-            if total <= m:
-                ans.append(total)
+           sun = numbers[i] + numbers[j] + numbers[k]
+           if sun <= m:
+               ans.append(sun)
 print(max(ans))
