@@ -1,9 +1,9 @@
 n = int(input())
 num = list(map(int, input().split()))
-f = int(input())
+v = int(input())
 
 cnt = 0
 for i in num:
-    if i == f:
+    if i == v:
         cnt += 1
 print(cnt)
