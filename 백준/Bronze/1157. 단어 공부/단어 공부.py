@@ -1,22 +1,19 @@
-n = input()
-up_n = n.upper()
-
-list_n = list(up_n)
-
-
+word = input()
+words = word.upper()
 ans = {}
-for i in list_n:
+
+for i in words:
     if i not in ans:
         ans[i] = 1
     else:
         ans[i] += 1
 
-# tmp = [key for key, value in ans.items() if max(ans.values()) == value]
 tmp = []
-for key, value in ans.items():
-    if max(ans.values()) == value:
-        tmp.append(key)
-if len(tmp) > 1:
+for k, v in ans.items():
+    if max(ans.values())==v:
+        tmp.append(k)
+
+if len(tmp) >= 2:
     print('?')
-else:
+elif len(tmp) == 1:
     print(*tmp)
