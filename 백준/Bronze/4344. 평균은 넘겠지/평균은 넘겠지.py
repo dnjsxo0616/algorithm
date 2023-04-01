@@ -1,14 +1,14 @@
-T = int(input())
-
-
-for t in range(T):
-    score = list(map(int, input().split()))
-    cnt = 0
-    score.remove(score[0])
-    sc_avg = (sum(score)/len(score))
+n = int(input())
+for _ in range(n):
+    num = list(map(int, input().split()))
     
-    for i in score:
-        if i > sc_avg:
+    num.remove(num[0])
+    avg = sum(num)/len(num)
+    
+    cnt = 0
+    for i in num:
+        if i > avg:
             cnt += 1
-    ans = cnt/len(score)*100
+    
+    ans = cnt/len(num)*100
     print(f'{ans:.3f}%')
