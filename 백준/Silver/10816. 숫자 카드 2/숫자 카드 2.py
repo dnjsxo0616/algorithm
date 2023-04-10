@@ -6,13 +6,14 @@ m = int(input())
 m_list = list(map(int, input().split())) # 있어야할 개수
 
 word = {}
-for i in m_list:
-    word[i]=0
-
-for j in n_list:
-    if j not in word:
-        continue
-    word[j] += 1
+for i in n_list:
+    if i not in word:
+        word[i] = 1
+    elif i in word:
+        word[i] += 1
 
 for i in m_list:
-    print(word[i], end = ' ')
+    if i in word:
+        print(word[i], end = ' ')
+    else:
+        print(0, end = ' ')
