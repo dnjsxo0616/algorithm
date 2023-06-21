@@ -1,10 +1,14 @@
-T = int(input())
+import sys
+input = sys.stdin.readline
+
+n = int(input())
 
 ans = []
-for t in range(T):
-    n = int(input())
-    if n == 0:
-        ans.pop()
+for _ in range(n):
+    num = int(input())
+    if num != 0:
+        ans.append(num)
     else:
-        ans.append(n)
+        ans.pop()
+
 print(sum(ans))
