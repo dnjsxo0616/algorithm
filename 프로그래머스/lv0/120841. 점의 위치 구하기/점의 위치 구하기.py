@@ -1,10 +1,3 @@
 def solution(dot):
-    if dot[0] > 0 and dot[1] > 0:
-        answer = 1
-    elif dot[0] < 0 and dot[1] > 0:
-        answer = 2
-    elif dot[0] < 0 and dot[1] < 0:
-        answer = 3
-    elif dot[0] > 0 and dot[1] < 0:
-        answer = 4
-    return answer
+    a = [(3,2),(4,1)]
+    return a[dot[0] >0][dot[1]>0]
