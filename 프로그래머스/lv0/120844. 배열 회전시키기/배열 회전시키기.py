@@ -1,8 +1,6 @@
 def solution(numbers, direction):
     if direction == "right":
-        a = numbers.pop()
-        numbers.insert(0, a)
+        answer = [numbers[-1]] + numbers[:len(numbers)-1]
     elif direction == "left":
-        a = numbers.pop(0)
-        numbers.append(a)
-    return numbers
+        answer = numbers[1:] + [numbers[0]]
+    return answer
