@@ -1,4 +1,6 @@
 def solution(nums):
-    N = len(nums) // 2
-    num = list(set(nums))
-    return min(len(num), N)
+    res = len(set(nums))
+    if len(nums) // 2 > res:
+        return res
+    else:
+        return len(nums) // 2
