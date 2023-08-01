@@ -1,6 +1,13 @@
 def solution(phone_book):
-    phone_book.sort()
-    for i, j in zip(phone_book, phone_book[1:]):
-        if j.startswith(i):
-            return False
+
+    hash_phone = {}
+    for num in phone_book:
+        hash_phone[num] = 1
+    
+    for num in phone_book:
+        res = ""
+        for number in num:
+            res += number
+            if res in hash_phone and res != num:
+                return False
     return True
