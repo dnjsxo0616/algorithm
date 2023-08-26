@@ -1,8 +1,10 @@
-card = list(range(1, int(input())+1))
-ans = []
+import sys
+input = sys.stdin.readline
 
-while len(card)>1:
-    ans.append(card.pop(0))
-    card.append(card[0])
-    card.pop(0)
-print(*ans, *card)
+n = int(input())
+num = [i for i in range(1, n+1)]
+
+while len(num)>1:
+    print(num.pop(0), end = " ")
+    num.append(num.pop(0))
+print(num[0])
