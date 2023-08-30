@@ -2,26 +2,14 @@ from collections import deque
 
 def solution(priorities, location):
     answer = 0
-    que = deque(priorities)
+    priorities = [(p, l) for p, l in enumerate(priorities)]
+    deque_p = deque(priorities)
     
-    lot = [0 for i in range(len(priorities))]
-    lot[location] = 1
-    
-    lot = deque(lot)
-    
-    cnt = 0
-    while lot:
-        priority = que.popleft()
-        check_lot = lot.popleft()
-        
-        if len(que) > 1 and max(que) > priority:
-            que.append(priority)
-            lot.append(check_lot)
-            
+    while True:
+        pre = deque_p.popleft()
+        if any(pre[1] < i[1] for i in deque_p):
+            deque_p.append(pre)
         else:
-            cnt += 1
-            if check_lot == 1:
-                answer = cnt
-                break
-        
-    return answer
+            answer += 1
+            if pre[0] == location:
+                return answer
