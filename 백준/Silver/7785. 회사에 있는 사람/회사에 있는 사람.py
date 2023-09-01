@@ -1,13 +1,19 @@
-lis ={}
-n = int(input())
+import sys
+input = sys.stdin.readline
 
-for _ in range(n):
-    a, b = input().split()
-    if b == 'enter':
-        lis[a] = b
+dict = {}
+for _ in range(int(input())):
+    n, r = input().split()
+    if r == 'enter':
+        dict[n] = 1
     else:
-        del lis[a]
+        dict[n] -= 1
 
-ans = sorted(lis, reverse=True)
-for i in ans:
+answer = []
+for i, j in dict.items():
+    if j == 1:
+        answer.append(i)
+
+answer.sort(reverse=True)
+for i in answer:
     print(i)
