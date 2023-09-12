@@ -1,15 +1,15 @@
-import sys
-import heapq
+import heapq, sys
+
 input = sys.stdin.readline
 
-ans = []
 
-for _ in range(int(input())):
-    n = int(input())
-    if n == 0:
-        if ans:
-            print(heapq.heappop(ans))
-        else:
-            print(0)
+N = int(input())
+h = []
+
+for _ in range(N):
+    s = int(input())
+
+    if s == 0:
+        print(heapq.heappop(h) if h else 0)
     else:
-        heapq.heappush(ans, n)
+        heapq.heappush(h, s)
