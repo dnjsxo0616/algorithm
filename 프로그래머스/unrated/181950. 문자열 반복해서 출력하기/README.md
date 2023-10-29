@@ -1,10 +1,10 @@
-# [unrated] 문자열 반복해서 출력하기 - 181950 
+# [level unrated] 문자열 반복해서 출력하기 - 181950 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/181950) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/181950?language=java) 
 
 ### 성능 요약
 
-메모리: 7.36 MB, 시간: 11.57 ms
+메모리: 68.6 MB, 시간: 131.88 ms
 
 ### 구분
 
@@ -12,7 +12,11 @@
 
 ### 채점결과
 
-Empty
+정확성: 100.0<br/>합계: 100.0 / 100.0
+
+### 제출 일자
+
+2023년 10월 0일 16:6:45
 
 ### 문제 설명
 
@@ -39,4 +43,4 @@ Empty
 <div class="highlight"><pre class="codehilite"><code>stringstringstringstringstring
 </code></pre></div>
 
-> 출처: 프로그래머스 코딩 테스트 연습, https://programmers.co.kr/learn/challenges
+> 출처: 프로그래머스 코딩 테스트 연습, https://school.programmers.co.kr/learn/challenges
