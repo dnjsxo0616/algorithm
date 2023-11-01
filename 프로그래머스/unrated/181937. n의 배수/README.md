@@ -1,10 +1,10 @@
 # [level unrated] n의 배수 - 181937 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/181937?language=java) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/181937) 
 
 ### 성능 요약
 
-메모리: 71.2 MB, 시간: 0.03 ms
+메모리: 73.3 MB, 시간: 0.01 ms
 
 ### 구분
 
@@ -16,7 +16,7 @@
 
 ### 제출 일자
 
-2023년 11월 4일 0:22:29
+2023년 11월 4일 0:23:38
 
 ### 문제 설명
 
