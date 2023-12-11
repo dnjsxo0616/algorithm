@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.lang.StringBuilder;
 
 public class Solution {
     public static void main(String[] args) {
@@ -6,6 +7,9 @@ public class Solution {
         String a = sc.next();
         String b = sc.next();
         
-        System.out.print(a+b);
+        StringBuilder sb = new StringBuilder();
+        sb.append(a).append(b);
+        
+        System.out.println(sb.toString());
     }
 }
