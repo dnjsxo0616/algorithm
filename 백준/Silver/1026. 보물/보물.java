@@ -1,38 +1,38 @@
 import java.util.*;
 
 public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
 
-  public static void main(String[] args) {
-      Scanner sc = new Scanner(System.in);
-      int r = sc.nextInt();
-      List<Integer> aNumbers = new ArrayList<>();
-      List<Integer> bNumbers = new ArrayList<>();
-      for(int i=0; i<r; i++) {
-          aNumbers.add(sc.nextInt());
-      }
 
-      for(int i=0; i<r; i++) {
-          bNumbers.add(sc.nextInt());
-      }
+        List<Integer> a = new ArrayList<>();
+        for(int i=0; i<t; i++) {
+            a.add(sc.nextInt());
+        }
 
-      Collections.sort(aNumbers);
-      List<Integer> bReverseSorted = new ArrayList<>(bNumbers);
-      bReverseSorted.sort(Comparator.reverseOrder());
-//      List<Integer> bReverseSorted = bNumbers.stream().sorted(Comparator.reverseOrder()).toList();
+        List<Integer> b = new ArrayList<>();
+        for(int i=0; i<t; i++) {
+            b.add(sc.nextInt());
+        }
 
-      List<Integer> bIndex = new ArrayList<>();
-      for(int br : bReverseSorted) {
-          bIndex.add(bNumbers.indexOf(br));
-      }
+        List<Integer> reverseB = new ArrayList<>(b);
 
-      int res = 0;
-      int b = 0;
-      for(int a : aNumbers) {
-          res += (a * bNumbers.get(bIndex.get(b)));
-          b += 1;
-      }
+        a.sort(Comparator.naturalOrder());
+        reverseB.sort(Comparator.reverseOrder());
 
-      System.out.println(res);
+        List<Integer> indexB = new ArrayList<>();
 
-  }
+        for(int c : reverseB) {
+            indexB.add(b.indexOf(c));
+        }
+
+        int ans = 0;
+
+        for(int j=0; j<t; j++) {
+            ans += (a.get(j) * b.get(indexB.get(j)));
+        }
+
+        System.out.print(ans);
+    }
 }
