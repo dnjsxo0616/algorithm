@@ -1,28 +1,31 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.*;
 
 public class Main {
-    static LinkedList<Integer>[] graph;
-    static boolean[] visited;
-    static List<Integer> resDFS;
+    static List<Integer>[] graph;
     static List<Integer> resBFS;
+    static List<Integer> resDFS;
+    static boolean[] visited;
+    static int n, m, v;
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt(); // 정점의 개수
-        int m = sc.nextInt(); // 간선의 개수
-        int v = sc.nextInt(); // 탐색을 시작할 정점의 번호
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        n = Integer.parseInt(st.nextToken());
+        m = Integer.parseInt(st.nextToken());
+        v = Integer.parseInt(st.nextToken());
 
-        graph = new LinkedList[n + 1];
-        resDFS = new ArrayList<>();
-        resBFS = new ArrayList<>();
-
+        graph = new ArrayList[n+1];
         for(int i=1; i<=n; i++) {
-            graph[i] = new LinkedList<>();
+            graph[i] = new ArrayList<>();
         }
 
         for(int i=0; i<m; i++) {
-            int a = sc.nextInt();
-            int b = sc.nextInt();
+            st = new StringTokenizer(br.readLine());
+            int a = Integer.parseInt(st.nextToken());
+            int b = Integer.parseInt(st.nextToken());
             graph[a].add(b);
             graph[b].add(a);
         }
@@ -31,59 +34,45 @@ public class Main {
             Collections.sort(graph[i]);
         }
 
-        // DFS
+        resBFS = new ArrayList<>();
+        resDFS = new ArrayList<>();
         visited = new boolean[n + 1];
         DFS(v);
-        // 마지막 숫자에는 공백이 들어가지 않도록 출력
-        for (int i = 0; i < resDFS.size(); i++) {
-            System.out.print(resDFS.get(i));
-            if (i < resDFS.size() - 1) {
-                System.out.print(" ");
-            }
+        for(int k : resDFS) {
+            System.out.print(k + " ");
         }
-
         System.out.println();
-
-        // BFS
         visited = new boolean[n + 1];
         BFS(v);
-        for (int i = 0; i < resBFS.size(); i++) {
-            System.out.print(resBFS.get(i));
-            if (i < resBFS.size() - 1) {
-                System.out.print(" ");
-            }
+        for(int k : resBFS) {
+            System.out.print(k + " ");
         }
-
     }
-    public static void DFS(int vNum) {
+
+    public static void BFS(int vNum){
+        Queue<Integer> queue = new LinkedList<>();
+        queue.offer(vNum);
         visited[vNum] = true;
-        resDFS.add(vNum);
-
-        for(int nNum : graph[vNum]) {
-            if(!visited[nNum]) {
-                if(!visited[nNum]) {
-                    DFS(nNum);
+        resBFS.add(vNum);
+        while(!queue.isEmpty()) {
+            int p = queue.poll();
+            for(int c : graph[p]) {
+                if(!visited[c]) {
+                    queue.offer(c);
+                    visited[c] = true;
+                    resBFS.add(c);
                 }
             }
+
         }
+
     }
-
-    public static void BFS(int vNUm) {
-        // BFS를 위한 큐 생성
-        LinkedList<Integer> queue = new LinkedList<>();
-
-        visited[vNUm] = true;
-        queue.add(vNUm);
-
-        while(!queue.isEmpty()) {
-            int q = queue.poll();
-            resBFS.add(q);
-
-            for(int nNum: graph[q]) {
-                if(!visited[nNum]) {
-                    visited[nNum] = true;
-                    queue.add(nNum);
-                }
+    public static void DFS(int v){
+        visited[v] = true;
+        resDFS.add(v);
+        for(int c : graph[v]) {
+            if(!visited[c]) {
+                DFS(c);
             }
         }
     }
