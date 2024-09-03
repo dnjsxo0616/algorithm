@@ -5,65 +5,64 @@ import java.util.*;
 
 public class Main {
     static int[][] graph;
+    static boolean[][] visited;
+    static int n, m, count;
     static int[] dx = {1, 0, -1, 0};
     static int[] dy = {0, 1, 0, -1};
-    static boolean[][] visited;
-    static int n, m, max, num;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer tk = new StringTokenizer(br.readLine());
-        n = Integer.parseInt(tk.nextToken());
-        m = Integer.parseInt(tk.nextToken());
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        n = Integer.parseInt(st.nextToken());
+        m = Integer.parseInt(st.nextToken());
 
         graph = new int[n][m];
         visited = new boolean[n][m];
 
-        // 그래프 입력 받기
-        for(int i = 0; i < n; i++) {
-            tk = new StringTokenizer(br.readLine());
-            for(int j = 0; j < m; j++) {
-                graph[i][j] = Integer.parseInt(tk.nextToken());
+        for(int i=0; i<n; i++) {
+            st = new StringTokenizer(br.readLine());
+            for(int j=0; j<m; j++) {
+                graph[i][j] = Integer.parseInt(st.nextToken());
             }
         }
 
-        max = 0;
-        num = 0;
-
-        // 그래프 탐색
-        for(int i = 0; i < n; i++) {
-            for(int j = 0; j < m; j++) {
-                if(graph[i][j] == 1 && !visited[i][j]) {
-                    num++;
-                    visited[i][j] = true;
-                    int area = 0;
-                    Queue<int[]> queue = new LinkedList<>();
-                    queue.offer(new int[] {i, j});
-
-                    while(!queue.isEmpty()) {
-                        area++;
-                        int[] current = queue.poll();
-                        int x = current[0];
-                        int y = current[1];
-
-                        for(int dir = 0; dir < 4; dir++) {
-                            int nx = x + dx[dir];
-                            int ny = y + dy[dir];
-
-                            if(nx < 0 || ny < 0 || nx >= n || ny >= m) continue;
-                            if(visited[nx][ny] || graph[nx][ny] != 1) continue;
-
-                            visited[nx][ny] = true;
-                            queue.offer(new int[] {nx, ny});
-                        }
-                    }
-
-                    max = Math.max(max, area);
+        int area = 0;
+        List<Integer> ans = new ArrayList<>();
+        for(int i=0; i<n; i++) {
+            for(int j=0; j<m; j++) {
+                if(!visited[i][j] && graph[i][j] == 1) {
+                    int bfs = BFS(i, j);
+                    ans.add(bfs);
+                    area++;
                 }
             }
         }
 
-        System.out.println(num);
-        System.out.println(max);
+        System.out.println(area);
+        int maxNum = ans.isEmpty() ? 0 : Collections.max(ans);
+        System.out.println(maxNum);
+    }
+
+    public static int BFS(int row, int col) {
+        Queue<int[]> queue = new LinkedList<>();
+        queue.offer(new int[]{row, col});
+        visited[row][col] = true;
+        count = 0;
+        while(!queue.isEmpty()) {
+            count++;
+            int[] p = queue.poll();
+            for(int i=0; i<4; i++) {
+                int nextX = p[1] + dx[i];
+                int nextY = p[0] + dy[i];
+
+                if(nextY >= 0 && nextX >= 0 && nextY < n && nextX < m) {
+                    if(!visited[nextY][nextX] && graph[nextY][nextX] == 1) {
+                        visited[nextY][nextX] = true;
+                        queue.offer(new int[]{nextY, nextX});
+                    }
+                }
+            }
+        }
+        return count;
     }
 }
