@@ -1,39 +1,45 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.*;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        int turn = sc.nextInt();
+    static List<List<Integer>> graph;
+    static boolean[] visited;
+    static int comNum, t, count;
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        List<Integer>[] graph = new ArrayList[n + 1];
-        for(int i=1; i<=n; i++) {
-            graph[i] = new ArrayList<>();
+        comNum = Integer.parseInt(br.readLine());
+        t = Integer.parseInt(br.readLine());
+
+        graph = new ArrayList<>();
+        for(int i=0; i<=comNum; i++) {
+            graph.add(new ArrayList<>());
+        }
+        visited = new boolean[comNum+1];
+
+        for(int i=0; i<t; i++) {
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            int n = Integer.parseInt(st.nextToken());
+            int m = Integer.parseInt(st.nextToken());
+
+            graph.get(n).add(m);
+            graph.get(m).add(n);
         }
 
-        for(int j=0; j<turn; j++) {
-            int a = sc.nextInt();
-            int b = sc.nextInt();
-            graph[a].add(b);
-            graph[b].add(a);
-        }
-        
-        Set<Integer> visited = new HashSet<>();
-        Queue<Integer> queue = new LinkedList<>();
-        
-        queue.add(1);
-        visited.add(1);
+        count = -1;
+        DFS(1);
+        System.out.println(count);
+    }
 
-        while(!queue.isEmpty()) {
-            int current = queue.poll();
-
-            for(int num : graph[current]) {
-                if (!visited.contains(num)) {
-                    visited.add(num);
-                    queue.add(num);
-                }
+    public static void DFS(int v) {
+        visited[v] = true;
+        count++;
+        for (int node : graph.get(v)) {
+            if(!visited[node]) {
+                DFS(node);
             }
         }
-        System.out.println(visited.size() - 1);
     }
 }
