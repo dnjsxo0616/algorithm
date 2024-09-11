@@ -15,28 +15,26 @@ public class Main {
         int n = Integer.parseInt(st.nextToken());
         int k = Integer.parseInt(st.nextToken());
 
-        LinkedList<Integer> nums = new LinkedList<>();
-
+        LinkedList<Integer> link = new LinkedList<>();
         for(int i=1; i<=n; i++) {
-            nums.add(i);
+            link.add(i);
         }
 
         int index = 0;
-        List<Integer> res = new ArrayList<>();
-        for(int i=0; i<n; i++) {
-            index = (index + (k - 1)) % nums.size();
-            int r = nums.remove(index);
-            res.add(r);
+        List<Integer> ans = new ArrayList<>();
+        while(!link.isEmpty()) {
+            index = (index + (k - 1)) % link.size();
+            int r = link.remove(index);
+            ans.add(r);
         }
 
-
         System.out.print("<");
-        for(int i=0; i<res.size(); i++) {
-            System.out.print(res.get(i));
-            if(i<res.size() - 1) {
+        for(int i=0; i<n; i++) {
+            System.out.print(ans.get(i));
+            if(i < n-1) {
                 System.out.print(", ");
             }
         }
-        System.out.println(">");
+        System.out.print(">");
     }
 }
