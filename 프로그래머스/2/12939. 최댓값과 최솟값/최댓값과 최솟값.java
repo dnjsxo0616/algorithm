@@ -2,17 +2,22 @@ import java.util.*;
 
 class Solution {
     public String solution(String s) {
-        List<Integer> list = new ArrayList<>();
         String[] str = s.split(" ");
+        int maxNumber = Integer.MIN_VALUE;
+        int minNumber = Integer.MAX_VALUE;
+        
         for(String ss : str) {
-            list.add(Integer.parseInt(ss));
+            int n = Integer.parseInt(ss);
+            if(n > maxNumber) {
+                maxNumber = n;
+            }
+            if(n < minNumber) {
+                minNumber = n;
+            }
         }
-        int maxNumber = Collections.max(list);
-        int minNumber = Collections.min(list);
-        String answer = "";
-        answer += String.valueOf(minNumber);
-        answer += " ";
-        answer += String.valueOf(maxNumber);
-        return answer;
+        
+        StringBuilder answer = new StringBuilder();
+        answer.append(minNumber).append(" ").append(maxNumber);
+        return answer.toString();
     }
 }
