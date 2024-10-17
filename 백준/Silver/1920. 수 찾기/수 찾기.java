@@ -5,45 +5,43 @@ import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class Main {
-    static int m;
-
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        m = Integer.parseInt(br.readLine());
-        StringTokenizer st = new StringTokenizer(br.readLine());
-
+        int m = Integer.parseInt(br.readLine());
         int[] nums = new int[m];
-        for (int i = 0; i < m; i++) {
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        for(int i=0; i<m; i++) {
             nums[i] = Integer.parseInt(st.nextToken());
         }
+
         Arrays.sort(nums);
 
         int n = Integer.parseInt(br.readLine());
         st = new StringTokenizer(br.readLine());
-        int[] finds = new int[n];
-        for (int i = 0; i < n; i++) {
-            int input = Integer.parseInt(st.nextToken());
-            if(binarySearch(nums, input)) {
-                System.out.println(1);
-            }else System.out.println(0);
+        for(int j=0; j<n; j++) {
+            int findNum = Integer.parseInt(st.nextToken());
+            int ans = binarySearch(nums, findNum);
+            System.out.println(ans);
         }
+
     }
 
-    public static boolean binarySearch(int[] nums, int key) {
-        int lo = 0;
-        int hi = nums.length-1;
+    public static int binarySearch(int[] array, int findNum) {
+        int low = 0;
+        int high = array.length - 1;
 
-        while (lo <= hi) {
-            int mid = (lo + hi) / 2;
-
-            if (key < nums[mid]) {
-                hi = mid - 1;
-            } else if (key > nums[mid]) {
-                lo = mid + 1;
+        while(low <= high) {
+            int mid = (low + high) / 2;
+            int guess = array[mid];
+            if(guess == findNum) {
+                return 1;
+            }
+            if(guess > findNum) {
+                high = mid - 1;
             } else {
-                return true;
+                low = mid + 1 ;
             }
         }
-        return false;
+        return 0;
     }
 }
